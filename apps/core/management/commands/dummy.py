@@ -1,5 +1,3 @@
-from math import ceil
-
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
@@ -14,18 +12,22 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         # Named (optional) arguments
         parser.add_argument(
-            "-c",
-            type=str,
-            help="Add number of posts",
+            "-admin",
+            type=bool,
+            help="Create Admin",
         )
 
     def handle(self, *args, **kwargs):
-        if not kwargs.get("c"):
-            posts_cnt = 10
-        else:
-            posts_cnt = int(kwargs.get("p"))
-
         self.stdout.write("Start loading dummy")
+
+        if kwargs.get("admin"):
+            # Local admin account
+            UserFactory(
+                username="admin",
+                email="admin@test.com",
+                password="1234",
+                is_staff=True,
+            )
 
         # populates globals() with django models, so no need to worry about importing them
         # https://stackoverflow.com/questions/59267620/how-to-import-all-django-models-and-more-in-a-script
@@ -35,6 +37,6 @@ class Command(BaseCommand):
         imported_objects = import_objects(options, style)
         globals().update(imported_objects)
 
-        UserFactory.create_batch(size=ceil(posts_cnt / 10))
+        UserFactory.create_batch(size=10)
 
         self.stdout.write("Finish load dummy")
