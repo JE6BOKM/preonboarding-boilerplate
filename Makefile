@@ -5,3 +5,6 @@ recreate-migration:
 
 prune:
 	git checkout develop && git pull origin develop && git fetch -p && git branch --merged | egrep -v "(^\*|master|develop)" | xargs git branch -d
+
+localserver:
+	docker-compose -f docker/compose/local.yml up --build

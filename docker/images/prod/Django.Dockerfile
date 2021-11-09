@@ -20,10 +20,10 @@ COPY --from=requirements-stage /tmp/requirements.txt /requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 
 # Adds our application code to the image
-COPY . /code
+# COPY . /code
 WORKDIR /code
 
-COPY --chown=django:django ./docker/images/local/start /start
+COPY ./docker/images/prod/start /start
 RUN chmod +x /start
 
 

@@ -19,7 +19,8 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 logger.addHandler(logging.StreamHandler())
 
-
+print("@@@@@@")
+print(config)
 def pg_isready(host, user, password, dbname):
     while time() - start_time < check_timeout:
         try:

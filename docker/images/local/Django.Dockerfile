@@ -26,7 +26,6 @@ WORKDIR /code
 COPY ./docker/images/local/start /start
 RUN chmod +x /start
 
-
 EXPOSE 8000
 
 # Run the production server

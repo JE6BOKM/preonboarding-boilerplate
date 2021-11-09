@@ -18,26 +18,35 @@ services:
     ports:
       - "5432:5432"
 
-  nginx:
-    image: nginx
-    container_name: nginx
-    ports:
-      - "80:80/tcp"
-    volumes:
-      - /home/ubuntu/config/nginx:/etc/nginx/conf.d
-    depends_on:
-      - django
+
+  # nginx:
+  #   build:
+  #     context: ../../
+  #     dockerfile: docker/images/prod/Nginx.Dockerfile
+  #   ports:
+  #     - "80:80"
+  # nginx:
+  #   image: nginx
+  #   container_name: nginx
+  #   ports:
+  #     - "80:80/tcp"
+  #   volumes:
+  #     - /home/ubuntu/config/nginx:/etc/nginx/conf.d
+  #   depends_on:
+  #     - django
 
   django:
     restart: always
     environment:
-      - DJANGO_SECRET_KEY=local
+      - DJANGO_SECRET_KEY=prod
     build:
       context: ../../
-      dockerfile: docker/images/local/Django.Dockerfile
+      dockerfile: docker/images/prod/Django.Dockerfile
     container_name: django
     volumes:
       - ../../:/code
+    env_file:
+      - ../../.envs/.prod.django
     ports:
       - "8000:8000"
     depends_on:
@@ -45,13 +54,13 @@ services:
     command:
       - /start
 
-  documentation:
-    restart: always
-    build:
-      context: ../../
-      dockerfile: docker/images/local/Django.Dockerfile
-    command: "mkdocs serve"
-    volumes:
-      - ../../:/code
-    ports:
-      - "8001:8001"
+  # documentation:
+  #   restart: always
+  #   build:
+  #     context: ../../
+  #     dockerfile: docker/images/prod/Django.Dockerfile
+  #   command: "mkdocs serve"
+  #   volumes:
+  #     - ../../:/code
+  #   ports:
+  #     - "8001:8001"
