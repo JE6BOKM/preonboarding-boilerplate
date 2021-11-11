@@ -11,7 +11,7 @@
 |신우주 |[shinwooju](https://github.com/shinwooju)     | 상품 CRUD   |
 |최혜림 |[rimi0108](https://github.com/rimi0108)     | 로그인   |
 |강성묵 |[miranaky](https://github.com/miranaky)     | 로그인   |
-|김민규 |[miranaky](https://github.com/SkyStar-K)     | 상품 CRUD  |
+|김민규 |[SkyStar-K](https://github.com/SkyStar-K)     | 상품 CRUD  |
 
 
 ## ⭐ 과제 내용
